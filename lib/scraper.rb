@@ -9,7 +9,7 @@ class Scraper
     doc.css(".article").each do |article|
       article_hash = {}
 
-      title = article.css("a[class='h-one article-title']").text.gsub("  ","").gsub("â","'")
+      title = article.css("a[class='h-one article-title']").text.gsub("  ","").gsub("â","'").gsub("\n","")
       url = article.css("a[class='h-one article-title']").attribute("href").value
       description = article.css(".desc").text.gsub("â","'")
       

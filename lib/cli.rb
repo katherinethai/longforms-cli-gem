@@ -24,7 +24,7 @@ class CLI
 
   def display_articles
     Article.all.each_with_index do |article, index|
-    puts "#{index + 1}. #{article.title}".colorize(:blue)
+    puts "#{index + 1}. #{article.title}\n".colorize(:blue)
     puts "#{article.description}"
     puts "----------------------".colorize(:green)
     end
