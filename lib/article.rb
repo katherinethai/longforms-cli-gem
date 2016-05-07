@@ -1,7 +1,7 @@
 require_relative '../config/environment'
 
 class Article
-  attr_accessor :title, :url, :description, :author, :source, :date
+  attr_accessor :title, :url, :description, :author, :source, :date, :length
 
   @@all = []
 

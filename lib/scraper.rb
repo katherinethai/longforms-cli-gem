@@ -9,25 +9,31 @@ class Scraper
     doc.css(".article").each do |article|
       article_hash = {}
 
-
       title = article.css("a[class='h-one article-title']").text.gsub("  ","").gsub("â","'")
       url = article.css("a[class='h-one article-title']").attribute("href").value
       description = article.css(".desc").text.gsub("â","'")
-      author = article.css("span.authors-container").first.text.gsub("\n","").gsub("  ","")
-      source = article.css(".article_details_left div.detail")[1].text.gsub("Source: ", "")
-      date = article.css(".article_details_right div.detail")[0].text.gsub("Published: ", "").gsub("\n","")
       
+      details_left = article.css(".article_details .article_details_left").text.gsub("\n","").gsub("  ","").gsub("Author: ","").split("Source: ")
+      author = details_left[0]
+      source = details_left[1]
+      
+      details_right = article.css(".article_details .article_details_right").text.gsub("\n","").gsub("Published:  ","").gsub("   ","").split("Length:  ")
+      date = details_right[0]
+      length = details_right[1]
+
       article_hash[:title] = title
       article_hash[:url] = url
       article_hash[:description] = description
       article_hash[:author] = author
       article_hash[:source] = source
       article_hash[:date] = date
+      article_hash[:length]= length
 
       article_array << article_hash
     end
-    article_array
+  article_array
   end
 
 end
 
+Scraper.scrape_index_page("http://longreads.com/picks/?page=4")

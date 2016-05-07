@@ -25,6 +25,7 @@ class CLI
   def display_articles
     Article.all.each_with_index do |article, index|
     puts "#{index + 1}. #{article.title}".colorize(:blue)
+    puts "#{article.description}"
     puts "----------------------".colorize(:green)
     end
     menu
@@ -33,10 +34,11 @@ class CLI
   def display_article_details(index)
     puts "----------------------".colorize(:green)
     puts "#{Article.all[index].title}".colorize(:blue)
+    puts "  Description:".colorize(:light_blue) + " #{Article.all[index].description}"
     puts "  Author(s):".colorize(:light_blue) + " #{Article.all[index].author}"
     puts "  Source:".colorize(:light_blue) + " #{Article.all[index].source}"
     puts "  Published:".colorize(:light_blue) + " #{Article.all[index].date}"
-    puts "  Description:".colorize(:light_blue) + " #{Article.all[index].description}"
+    puts "  Length:".colorize(:light_blue) + " #{Article.all[index].length}"
     puts ""
     puts "  Link:".colorize(:light_blue) + " #{Article.all[index].url}"
     puts "----------------------".colorize(:green)
