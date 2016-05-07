@@ -10,7 +10,7 @@ class Article
     @@all << self
   end
 
-  def create_from_collection(articles_array)
+  def self.create_from_collection(articles_array)
     articles_array.each do |article_hash|
       Article.new(article_hash)
     end
@@ -18,6 +18,10 @@ class Article
 
   def self.all
     @@all
+  end
+
+  def self.reset
+    @all.clear
   end
 
 end

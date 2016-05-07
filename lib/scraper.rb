@@ -2,8 +2,8 @@ require_relative '../config/environment'
 
 class Scraper
 
-  def self.scrape_index_page
-    doc = Nokogiri::HTML(open("https://longreads.com/"))
+  def self.scrape_index_page(page_url)
+    doc = Nokogiri::HTML(open(page_url))
     article_array = []
 
     doc.css(".article").each do |article|
@@ -16,7 +16,7 @@ class Scraper
       author = article.css("span.authors-container").first.text.gsub("\n","").gsub("  ","")
       source = article.css(".article_details_left div.detail")[1].text.gsub("Source: ", "")
       date = article.css(".article_details_right div.detail")[0].text.gsub("Published: ", "").gsub("\n","")
-
+      
       article_hash[:title] = title
       article_hash[:url] = url
       article_hash[:description] = description
@@ -26,6 +26,8 @@ class Scraper
 
       article_array << article_hash
     end
+    article_array
   end
 
 end
+
